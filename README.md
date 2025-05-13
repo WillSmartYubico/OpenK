@@ -10,7 +10,7 @@ This is not an officially supported Yubico product.
 This is not an officially supported Google product.
 
 This project is **proof-of-concept and a research platform**. It is **NOT**
-meant for a daily usage. This
+meant for a daily usage.
 
 ## OpenK
 
