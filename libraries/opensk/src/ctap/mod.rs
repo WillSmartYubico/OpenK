@@ -330,7 +330,10 @@ pub fn check_user_presence<E: Env>(env: &mut E, channel: Channel) -> CtapResult<
     let loop_timer = env.clock().make_timer(TOUCH_TIMEOUT_MS);
 
     // We don't use the '?' operator to always reach check_complete(...).
-    let mut result = Err(TIMEOUT_ERROR);
+    // defect-yup
+    // Changes the default (timeout) result for check_user_presence from Err(TIMEOUT_ERROR) to Ok(())
+    // When the end of the timer is reached, the key will indicate user presence.
+    let mut result = Ok(());
     while !env.clock().is_elapsed(&loop_timer) {
         match wait_and_respond_busy(env, channel) {
             Err(TIMEOUT_ERROR) => (),
