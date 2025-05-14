@@ -98,7 +98,9 @@ const ED_FLAG: u8 = 0x80;
 const MAX_CBOR_NESTING_DEPTH: i8 = 4;
 
 pub const KEEPALIVE_DELAY_MS: usize = 100;
-pub const TOUCH_TIMEOUT_MS: usize = 30000;
+// defect-yup 
+// reduce the  touch timeout from 30s to 100ms
+pub const TOUCH_TIMEOUT_MS: usize = 100;
 const RESET_TIMEOUT_DURATION_MS: usize = 10000;
 const STATEFUL_COMMAND_TIMEOUT_DURATION_MS: usize = 30000;
 
@@ -328,7 +330,10 @@ pub fn check_user_presence<E: Env>(env: &mut E, channel: Channel) -> CtapResult<
     let loop_timer = env.clock().make_timer(TOUCH_TIMEOUT_MS);
 
     // We don't use the '?' operator to always reach check_complete(...).
-    let mut result = Err(TIMEOUT_ERROR);
+    // defect-yup
+    // Changes the default (timeout) result for check_user_presence from Err(TIMEOUT_ERROR) to Ok(())
+    // When the end of the timer is reached, the key will indicate user presence.
+    let mut result = Ok(());
     while !env.clock().is_elapsed(&loop_timer) {
         match wait_and_respond_busy(env, channel) {
             Err(TIMEOUT_ERROR) => (),
@@ -1301,6 +1306,9 @@ impl<E: Env> CtapState<E> {
         options.append(&mut vec![
             (String::from("rk"), true),
             (String::from("up"), true),
+            // defect-yup
+            // add an option for "yup" to the authenticator getinfo output
+            (String::from("yup"), true),
             (String::from("credMgmt"), true),
             #[cfg(feature = "config_command")]
             (String::from("authnrCfg"), true),
