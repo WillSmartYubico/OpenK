@@ -27,6 +27,21 @@ avenues for some automated testing scenarios.
 For general information about the excellent OpenSK project this work is based 
 on, visit https://github.com/google/opensk
 
+## Using this repository & branch structure
+
+If normal software projects use feature branches, this repository uses *defect* 
+branches.  Some effort will be made to ensure each defect branch is modular, but 
+nothing in this project is guaranteed.
+
+To use theis repository, first fork it, and then create a new branch based off 
+of "develop".  Then, merge in each of the defect branches for the defects you 
+want to introduce.
+
+Optionally, merge in the nrfutil branch if you're using a newer version of the 
+nrfutil binary that doesn't support the version subcommand.
+
+Finally, build the project as documented in the original OpenSK project.
+
 ## Reporting a Vulnerability
 
 Don't.  This project is all vulnerabilities.
