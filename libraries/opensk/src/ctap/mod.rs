@@ -1306,6 +1306,9 @@ impl<E: Env> CtapState<E> {
         options.append(&mut vec![
             (String::from("rk"), true),
             (String::from("up"), true),
+            // defect-yup
+            // add an option for "yup" to the authenticator getinfo output
+            (String::from("yup"), true),
             (String::from("credMgmt"), true),
             #[cfg(feature = "config_command")]
             (String::from("authnrCfg"), true),
