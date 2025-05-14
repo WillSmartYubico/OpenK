@@ -98,7 +98,9 @@ const ED_FLAG: u8 = 0x80;
 const MAX_CBOR_NESTING_DEPTH: i8 = 4;
 
 pub const KEEPALIVE_DELAY_MS: usize = 100;
-pub const TOUCH_TIMEOUT_MS: usize = 30000;
+// defect-yup 
+// reduce the  touch timeout from 30s to 100ms
+pub const TOUCH_TIMEOUT_MS: usize = 100;
 const RESET_TIMEOUT_DURATION_MS: usize = 10000;
 const STATEFUL_COMMAND_TIMEOUT_DURATION_MS: usize = 30000;
 
